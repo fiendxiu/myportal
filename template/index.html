@@ -1,0 +1,30 @@
+{% include "tpl/header.tpl.html" %}
+    {% include "tpl/nav.tpl.html" %}
+        {% include "tpl/sidebar.tpl.html" %}
+
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <div class="card-controls">
+                                            <select class="form-control form-control-sm d-none d-md-inline-block" style="width:260px; display:inline-block" placeholder="">
+                                                <option selected="">信息1</option>
+                                                <option>信息2</option>
+                                            </select>
+                                        </div>
+                                        <h3 class="card-title">账户总览</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chart-profit" style="height: 500px; padding: 0px; position: relative;">
+                                            <canvas class="flot-base" width="686" height="379" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 686.953px; height: 379px;"></canvas>
+                                            <canvas class="flot-overlay" width="686" height="379" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 686.953px; height: 379px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+
+    {% include "tpl/footer.tpl.html" %}
+{% include "tpl/eof.tpl.html" %}
