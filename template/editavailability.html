@@ -1,0 +1,37 @@
+{% include "tpl/header.tpl.html" %}
+    {% include "tpl/nav.tpl.html" %}
+        {% include "tpl/adminsidebar.tpl.html" %}
+
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">编辑触发器</h3>
+                                    </div>
+                                    <div class="card-body" align="center">
+                                        <form method="post" style="width:40%;text-align:left">{% csrf_token %}
+                                            {% for field in form %}
+                                            <div class="form-group">
+                                                {% ifequal field.name "username" %}
+                                                <input type="hidden" name="username" value="{{ field.value }}" />
+                                                {% else %}
+                                                <label>{{ field.label }}</label>
+                                                {{ field }}
+                                                {% endifequal %}
+                                            </div>
+                                            {% endfor %}
+                                            <a href="javascript:history.back()" class="btn btn-primary">返回</a>
+                                            <button type="submit" class="btn btn-success">提交</button>
+                                            {% if error %}
+                                            <label style="margin-left:25px">***{{ error }}***</label>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+
+    {% include "tpl/footer.tpl.html" %}
+{% include "tpl/eof.tpl.html" %}

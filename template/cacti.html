@@ -8,58 +8,32 @@
                                 <div class="card card-default widget animated" style="animation-delay: 0.29s;">
                                     <div class="card-heading">
                                         <div class="card-controls">
-                                            <select class="form-control form-control-sm d-none d-md-inline-block" style="width:260px; display:inline-block" placeholder="">
-                                                <option selected="">线路1</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
-                                                <option>线路2</option>
+                                            <select class="form-control form-control-sm d-none d-md-inline-block" style="width:260px; display:inline-block" placeholder="" onchange="select_change()">
+                                                {% for line in lines %}
+                                                    {% ifequal line.description line_desc %}
+                                                    <option selected=""> {{ line.description }} </option>
+                                                    {% else %}
+                                                    <option> {{ line.description }} </option>
+                                                    {% endifequal %}
+                                                {% endfor %}
                                             </select>
                                         </div>
                                         <h3 class="card-title">线路流量</h3>
                                     </div>
                                     <div class="card-body">
-                                        <div id="chart-profit" style="height: 500px; padding: 0px; position: relative;">
-                                            <canvas class="flot-base" width="686" height="379" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 686.953px; height: 379px;"></canvas>
-                                            <canvas class="flot-overlay" width="686" height="379" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 686.953px; height: 379px;"></canvas>
+                                        <div id="image-cacti" style="height: auto; width: 100%; padding: 0px; position: relative;" align="center">
+                                            {% if lines %}
+                                            <h6>Daily (5 Minute Average)</h6>
+                                            <image alt="图形加载失败" src="{{ image_url }}&rra_id=1" style="width:auto;height:auto;max-width:100%;max-height:100%"></image>
+                                            <h6>Weekly (5 Minute Average)</h6>
+                                            <image alt="图形加载失败" src="{{ image_url }}&rra_id=2" style="width:auto;height:auto;max-width:100%;max-height:100%"></image>
+                                            <h6>Monthly (5 Minute Average)</h6>
+                                            <image alt="图形加载失败" src="{{ image_url }}&rra_id=3" style="width:auto;height:auto;max-width:100%;max-height:100%"></image>
+                                            <h6>Yearly (5 Minute Average)</h6>
+                                            <image alt="图形加载失败" src="{{ image_url }}&rra_id=4" style="width:auto;height:auto;max-width:100%;max-height:100%"></image>
+                                            {% else %}
+                                            <p align="left">您还未开通流量图形</p>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -68,4 +42,10 @@
                         </div>
 
     {% include "tpl/footer.tpl.html" %}
+    <script language="JavaScript"> 
+    function myrefresh() { 
+       window.location.reload(); 
+    } 
+    setTimeout('myrefresh()',300000); //指定5分钟刷新一次 
+    </script>
 {% include "tpl/eof.tpl.html" %}

@@ -13,34 +13,35 @@
                                 <a href="#" class="sidebar-close"><i class="ion ion-ios-arrow-left"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/"><i class="ion ion-ios-home"></i> <span class="nav-text">账户总览</span></a>
+                                <a class="nav-link" href="/"><i class="ion ion-ios-home"></i> <span class="nav-text">账户资料</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-container dropdown-toggle" data-toggle="collapse" data-parent="#sidebar-stacked" href="#p1">
-                                  <i class="ion ion-monitor"></i> <span class="nav-text">流量监控</span>
+                                <a class="nav-link" href="/cacti/">
+                                  <i class="ion ion-monitor"></i> <span class="nav-text">流量图形</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/availability/">
+                                  <i class="ion ion-shuffle"></i> <span class="nav-text">线路状态</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-container dropdown-toggle" data-toggle="collapse" href="#p1">
+                                  <i class="ion ion-arrow-graph-up-right"></i> <span class="nav-text">骨干SLA数据</span>
                                 </a>
                                 <ul class="nav nav-pills nav-stacked collapse" id="p1">
-                                    <li class="nav-item"><a class="nav-link" href="/cacti/">流量监控</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/sla/?latency">Latency</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/sla/?loss">Packet Loss Rate</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/sla/?jlitter">Jlitter</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-container dropdown-toggle" data-toggle="collapse" data-parent="#sidebar-stacked" href="#p2">
-                                  <i class="ion ion-arrow-graph-up-right"></i> <span class="nav-text">SLA指标</span>
+                                <a class="nav-link" href="/nflow/">
+                                  <i class="ion ion-ios-pie"></i> <span class="nav-text">流量分析</span>
                                 </a>
-                                <ul class="nav nav-pills nav-stacked collapse" id="p2">
-                                    <li class="nav-item"><a class="nav-link" href="/sla/">SLA指标</a></li>
-                                </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-container dropdown-toggle" data-toggle="collapse" data-parent="#sidebar-stacked" href="#p3">
-                                  <i class="ion ion-ios-pie"></i> <span class="nav-text">Netflow</span>
-                                </a>
-                                <ul class="nav nav-pills nav-stacked collapse" id="p3">
-                                    <li class="nav-item"><a class="nav-link" href="/nflow/">Netflow</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-container" href="/report/">
+                                <a class="nav-link" href="/report/">
                                   <i class="ion ion-document"></i> <span class="nav-text">报表</span>
                                 </a>
                             </li>

@@ -3,6 +3,17 @@
     <script src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Vendor -->
     <!-- Theme -->
+    <script src="/static/assets/js/spark.js"></script>
+    <script>
+    $(document).ready(function () {
+        Spark.init();
+    });
+    function select_change(){
+        var obj=document.getElementsByTagName('select');
+        var index=obj[0].selectedIndex;
+        window.location = "{{ url }}?mcid=" + index
+    }
+    </script>
     <div class="flotTip" style="position: absolute; left: 973px; top: 483px; display: none;"></div>
     <div class="jvectormap-tip"></div>
 </body>

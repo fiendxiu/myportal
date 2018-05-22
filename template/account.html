@@ -1,0 +1,274 @@
+{% include "tpl/header.tpl.html" %}
+    {% include "tpl/nav.tpl.html" %}
+        {% include "tpl/adminsidebar.tpl.html" %}
+
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">账户管理</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="table-normal_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered dataTable">
+                                                        <tr>
+                                                            <th>用户名</th>
+                                                            <th>激活</th>
+                                                            <th>最后一次登入时间</th>
+                                                            <th>创建时间</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{ account.username }}</td>
+                                                            <td>
+                                                                {% if not account.is_active %}
+                                                                <i class="ion ion-close-circled" style="color:red"></i>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>{{ account.last_login }}</td>
+                                                            <td>{{ account.date_joined }}</td>
+                                                            <td>
+                                                                <a href="/active/{{ account.username }}" class="btn btn-round btn-success" style="padding:2px 6px">激活</a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-md-6 -->
+                            <div class="col-md-6">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">报表管理</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="table-normal_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            {# form 的请求方法为 post #}
+                                            {# enctype 属性为 "multipart/form-data" 才能正确发送 #}
+                                            {# 发送到的网址 save_profile 将在下面 url 中定义 #}
+                                            <form enctype="multipart/form-data" method="POST">{% csrf_token %} {# 上传图片的表单 #}
+                                            {% for field in form %}
+                                                {% ifequal field.label 'Username' %}
+                                                    <input type="hidden" name="username" value="{{ username }}" />
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endifequal %}
+                                            {% endfor %}
+                                            {# 按钮，type 属性需设为 "submit" #}
+                                                <button type="submit" class="btn btn-default">上传</button>
+                                            </form>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered dataTable">
+                                                        <tr>
+                                                            <th>文件名</th>
+                                                            <th>上传日期</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        {% for re in report %}
+                                                        <tr>
+                                                            <td>{{ re.filename }}</td>
+                                                            <td>{{ re.create_date }}</td>
+                                                            <td>
+                                                                <a href="/delete/report/{{ re.id }}" class="btn btn-round btn-success" style="padding:2px 6px">删除</a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-md-6 -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">客户信息</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="table-normal_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="dataTables_length" id="table-normal_length">
+                                                        <a href="/add/customer/{{ username }}" class="btn btn-default btn-xs">增加信息</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered dataTable">
+                                                        <tr>
+                                                            <th>合同名</th>
+                                                            <th>客户经理</th>
+                                                            <th>客户经理邮箱</th>
+                                                            <th>创建时间</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        {% for cus in customer %}
+                                                        <tr>
+                                                            <td>{{ cus.contract }}</td>
+                                                            <td>{{ cus.sale }}</td>
+                                                            <td>{{ cus.email }}</td>
+                                                            <td>{{ cus.create_date }}</td>
+                                                            <td>
+                                                                <a href="/edit/customer/{{ cus.id }}" class="btn btn-round btn-success" style="padding:2px 6px">编辑</a>
+                                                                <a href="/delete/customer/{{ cus.id }}" class="btn btn-round btn-success" style="padding:2px 6px">删除</a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /.col-md-6 -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">流量分析管理</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="table-normal_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="dataTables_length" id="table-normal_length">
+                                                        <a href="/add/netflow/{{ username }}" class="btn btn-default btn-xs">新建Netflow帐号</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered dataTable">
+                                                        <tr>
+                                                            <th>Netflow帐号</th>
+                                                            <th>Netflow密码</th>
+                                                            <th>服务器</th>
+                                                            <th>创建时间</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        {% for nflow in netflow %}
+                                                        <tr>
+                                                            <td>{{ nflow.j_username }}</td>
+                                                            <td>{{ nflow.j_password }}</td>
+                                                            <td>{{ nflow.server }}</td>
+                                                            <td>{{ nflow.create_date }}</td>
+                                                            <td>
+                                                                <a href="/edit/netflow/{{ nflow.id }}" class="btn btn-round btn-success" style="padding:2px 6px">编辑</a>
+                                                                <a href="/delete/netflow/{{ nflow.id }}" class="btn btn-round btn-success" style="padding:2px 6px">删除</a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /.col-md-6 -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">流量图管理</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="table-normal_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="dataTables_length" id="table-normal_length">
+                                                        <a href="/add/cacti/{{ username }}" class="btn btn-default btn-xs">增加图形</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered dataTable">
+                                                        <tr>
+                                                            <th>描述</th>
+                                                            <th>服务器</th>
+                                                            <th>图形ID</th>
+                                                            <th>创建时间</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        {% for ca in cacti %}
+                                                        <tr>
+                                                            <td>{{ ca.description }}</td>
+                                                            <td>{{ ca.server }}</td>
+                                                            <td>{{ ca.graphid }}</td>
+                                                            <td>{{ ca.create_date }}</td>
+                                                            <td>
+                                                                <a href="/edit/cacti/{{ ca.id }}" class="btn btn-round btn-success" style="padding:2px 6px">编辑</a>
+                                                                <a href="/delete/cacti/{{ ca.id }}" class="btn btn-round btn-success" style="padding:2px 6px">删除</a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /.col-md-6 -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">线路监控管理</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="table-normal_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="dataTables_length" id="table-normal_length">
+                                                        <a href="/add/availability/{{ username }}" class="btn btn-default btn-xs">增加触发器</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered dataTable">
+                                                        <tr>
+                                                            <th>IP</th>
+                                                            <th>描述</th>
+                                                            <th>触发器ID</th>
+                                                            <th>创建时间</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        {% for avail in availability %}
+                                                        <tr>
+                                                            <td>{{ avail.ip }}</td>
+                                                            <td>{{ avail.description }}</td>
+                                                            <td>{{ avail.triggerid }}</td>
+                                                            <td>{{ avail.create_date }}</td>
+                                                            <td>
+                                                                <a href="/edit/availability/{{ avail.id }}" class="btn btn-round btn-success" style="padding:2px 6px">编辑</a>
+                                                                <a href="/delete/availability/{{ avail.id }}" class="btn btn-round btn-success" style="padding:2px 6px">删除</a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /.col-md-6 -->
+                            </div>
+                        </div>
+
+    {% include "tpl/footer.tpl.html" %}
+{% include "tpl/eof.tpl.html" %}

@@ -26,5 +26,5 @@
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
-    src: local('Montserrat Bold'), url(montserrat/700.woff) format('woff')
+    src: local('Montserrat Bold'), url(montserrat/600.woff) format('woff')
 }

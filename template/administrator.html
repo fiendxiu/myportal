@@ -1,0 +1,110 @@
+{% include "tpl/header.tpl.html" %}
+    {% include "tpl/nav.tpl.html" %}
+        {% include "tpl/adminsidebar.tpl.html" %}
+
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">客户管理</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="table-normal_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="dataTables_length" id="table-normal_length">
+                                                        <a href="add/user/newuser" class="btn btn-default btn-xs">新建客户账户</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div id="table-normal_filter" class="dataTables_filter">
+                                                        <form action="/search/" method="GET">
+                                                        <label>Search:
+                                                            <input name="username" class="form-control form-control-sm" placeholder="用户名" aria-controls="table-normal" />
+                                                            <button class="btn btn-round btn-success btn-xs" type="submit">搜索</button>
+                                                        </label>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    {% if not error %}
+                                                    <table class="table table-striped table-bordered dataTable">
+                                                        <tr>
+                                                            <th>用户名</th>
+                                                            <th>管理员</th>
+                                                            <th>激活</th>
+                                                            <th>最后一次登入时间</th>
+                                                            <th>创建时间</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        {% for cus in room.object_list %}
+                                                        <tr>
+                                                            <td>
+                                                                <a href="/account/{{ cus.username }}">{{ cus.username }}</a>
+                                                            </td>
+                                                            <td>
+                                                                {% if cus.is_superuser %}
+                                                                <i class="ion ion-checkmark-circled" style="color:green"></i>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                {% if not cus.is_active %}
+                                                                <i class="ion ion-close-circled" style="color:red"></i>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>{{ cus.last_login }}</td>
+                                                            <td>{{ cus.date_joined }}</td>
+                                                            <td>
+                                                                <a href="/delete/user/{{ cus.username }}" class="btn btn-round btn-success" style="padding:2px 6px">删除</a> 
+                                                                <a href="/resetpasswd/{{ cus.username }}" class="btn btn-round btn-success" style="padding:2px 6px">修改密码</a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                    {% else %}
+                                                    <p align="center">{{ error }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <div class="dataTables_info" id="table-normal_info" role="status" aria-live="polite">共 {{ room.paginator.count }} 条记录</div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-7">
+                                                    <div class="dataTables_paginate paging_simple_numbers">
+                                                        <ul class="pagination">
+                                                            {% if room.has_previous %}
+                                                                {% if curl %}
+                                                                <li class="paginate_button page-item previous"><a href="{{ curl }}&page={{ room.previous_page_number }}" class="page-link">上一页</a></li>
+                                                                {% else %}
+                                                                <li class="paginate_button page-item previous"><a href="?page={{ room.previous_page_number }}" class="page-link">上一页</a></li>
+                                                                {% endif %}
+                                                            {% else %}
+                                                            <li class="paginate_button page-item previous"><a class="page-link">上一页</a></li>
+                                                            {% endif %}
+                                                            <li class="paginate_button page-item"><a class="page-link">第{{ room.number }}页</a></li>
+                                                            {% if room.has_next %}
+                                                                {% if curl %}
+                                                                <li class="paginate_button page-item next"><a href="{{ curl }}&page={{ room.next_page_number }}" class="page-link">下一页</a></li>
+                                                                {% else %}
+                                                                <li class="paginate_button page-item next"><a href="?page={{ room.next_page_number }}" class="page-link">下一页</a></li>
+                                                                {% endif %}
+                                                            {% else %}
+                                                            <li class="paginate_button page-item next"><a class="page-link">下一页</a></li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+
+    {% include "tpl/footer.tpl.html" %}
+{% include "tpl/eof.tpl.html" %}

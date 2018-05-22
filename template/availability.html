@@ -1,0 +1,42 @@
+{% include "tpl/header.tpl.html" %}
+    {% include "tpl/nav.tpl.html" %}
+        {% include "tpl/sidebar.tpl.html" %}
+
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">线路状态</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chart-profit" style="height: auto; padding: 0px; position: relative;">
+                                            <table class="table">
+                                                <tr>
+                                                    <th>IP</th>
+                                                    <th>描述</th>
+                                                    <th>本月断线时间</th>
+                                                    <th>本月可用性</th>
+                                                    <th>上月断线时间</th>
+                                                    <th>上月可用性</th>
+                                                </tr>
+                                                {% for line in lines %}
+                                                <tr>
+                                                    <td>{{ line.ip }}</td>
+                                                    <td>{{ line.description }}</td>
+                                                    <td>{{ line.thisMonthDown }}</td>
+                                                    <td>{{ line.thisMonthSLA }}</td>
+                                                    <td>{{ line.lastMonthDown }}</td>
+                                                    <td>{{ line.lastMonthSLA }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+
+    {% include "tpl/footer.tpl.html" %}
+{% include "tpl/eof.tpl.html" %}

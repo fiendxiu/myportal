@@ -115,14 +115,14 @@ var Spark = {
         }
     },
     init: function() {
-        this.removeNoJs();
-        this.removeLoadingScreen();
+//        this.removeNoJs();
+//        this.removeLoadingScreen();
         this.animateWidgetsAfterPageLoad();
         this.createSidebar();
-        this.createSearch();
-        this.createSnackbars();
-        this.createWidgets();
-        this.handleElementsOnResizing();
+//        this.createSearch();
+//        this.createSnackbars();
+//        this.createWidgets();
+//        this.handleElementsOnResizing();
         this.rightToLeft();
     }
 }

@@ -25,7 +25,13 @@ urlpatterns += [
     path('', views.index),
     re_path(r'^login/$', views.login_view),
     re_path(r'^logout/$', views.logout_view),
-    re_path(r'^resetpasswd/$', views.reset_passwd),
+    re_path(r'^resetpasswd/(?P<username>\w+)/$', views.reset_passwd),
+    re_path(r'^search/$', views.search),
+    re_path(r'^active/(?P<username>\w+)/$', views.isActive),
+    re_path(r'^account/(?P<username>\w+)/$', views.account),
 
-    re_path(r'^(?P<menu>\w+/$)', views.menu),
+    re_path(r'^(?P<menu>\w+)/$', views.menu),
+    re_path(r'^delete/(?P<key>\w+)/(?P<username>\w+)/$',views.delete),
+    re_path(r'^edit/(?P<key>\w+)/(?P<username>\w+)/$',views.edit),
+    re_path(r'^add/(?P<key>\w+)/(?P<username>\w+)/$',views.add),
 ]

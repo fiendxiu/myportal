@@ -1,0 +1,31 @@
+{% include "tpl/header.tpl.html" %}
+    {% include "tpl/nav.tpl.html" %}
+        {% include "tpl/adminsidebar.tpl.html" %}
+
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card card-default widget animated" style="animation-delay: 0.29s;">
+                                    <div class="card-heading">
+                                        <h3 class="card-title">重置密码</h3>
+                                    </div>
+                                    <div class="card-body" align="center">
+                                        <form method="post" style="width:40%;text-align:left">{% csrf_token %}
+                                            <div class="form-group">
+                                                <label>New Password(必填)</label>
+                                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                            </div>
+                                            <a href="/" class="btn btn-primary">返回</a>
+                                            <button type="submit" class="btn btn-success">提交</button>
+                                            {% if error %}
+                                            <label style="margin-left:25px">***{{ error }}***</label>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+
+    {% include "tpl/footer.tpl.html" %}
+{% include "tpl/eof.tpl.html" %}

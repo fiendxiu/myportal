@@ -11,11 +11,11 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户中心</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user }}</a>
                         <ul class="dropdown-menu">
-                            <li><span class="nav-text">Welcome, my name</span>
+                            <li><span class="nav-link">用户中心</span></li>
                             <li role="separator" class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/resetpasswd/"><i class="ion ion-person"></i> 修改密码</a></li>
+                            <li><a class="dropdown-item" href="/resetpasswd/{{ user }}"><i class="ion ion-person"></i> 修改密码</a></li>
                             <li><a class="dropdown-item" href="/logout/"><i class="ion ion-log-out"></i> 退出</a></li>
                         </ul>
                     </li>

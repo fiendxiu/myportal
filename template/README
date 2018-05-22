@@ -1,0 +1,15 @@
+account.html		管理页：单个用户帐号内的管理页
+adduser.html		管理页：添加用户帐号
+administrator.html	管理页：管理员登入后的首页
+availability.html	客户页：用户触发器可用性的显示页
+cacti.html		客户页：用户流量图的显示页
+index.html		客户页：用户登入后的首页
+nflow.html		客户页：用户netflow的显示页
+page-error-404.html	系统页：404错误页
+page-error-500.html	系统页：500错误页
+page-login.html		系统页：登入页
+README			当前目录下的文件描述
+report.html		客户页：用户报表的显示页
+resetpasswd.html	系统页：重置密码
+sla.html		客户页：用户看公司骨干SLA
+tpl			子目录：存放前端模板模块文件
